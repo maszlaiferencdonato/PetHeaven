@@ -265,7 +265,7 @@ function closeModal(modalId) {
     document.body.style.overflow = "";
 }
 
-window.addEventListener("DOMContentLoaded"), () => {
+window.addEventListener("DOMContentLoaded", () => {
     const mobileMenuBtn = document.getElementById("mobileMenuBtn");
     const mobileMenu = document.getElementById("mobileMenu");
     if (mobileMenuBtn && mobileMenu) {
@@ -281,6 +281,6 @@ window.addEventListener("DOMContentLoaded"), () => {
             }
         });
     });
-}
 
     renderAnimals();
+});
