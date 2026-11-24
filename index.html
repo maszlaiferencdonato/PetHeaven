@@ -3,181 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tappancs Menedék – Örökbefogadó és Támogató Rendszer</title>
-    <!-- Tailwind CSS betöltése -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Plus Jakarta Sans & Nunito a barátságos, tiszta tipográfiáért -->
+    <title>PetHeaven</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome ikonok -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Nunito', 'sans-serif'],
-                        heading: ['Plus Jakarta Sans', 'sans-serif'],
-                    },
-                    colors: {
-                        cream: {
-                            50: '#FDFBF7',
-                            100: '#F8F4EC',
-                            200: '#EFE7D8',
-                            300: '#E2D4BC',
-                        },
-                        sage: {
-                            50: '#F2F6F3',
-                            100: '#E1EBE4',
-                            500: '#5C836B',
-                            600: '#496B56',
-                            700: '#395443',
-                        },
-                        terracotta: {
-                            50: '#FDF5F2',
-                            100: '#FAE6DF',
-                            400: '#E88363',
-                            500: '#D96B48',
-                            600: '#C05635',
-                        },
-                        bark: {
-                            800: '#3D352E',
-                            900: '#2A241F',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        /* Egyedi görgetősáv és finom animációk */
-        body {
-            background-color: #FDFBF7;
-            color: #3D352E;
-        }
-        .modal-backdrop {
-            background-color: rgba(42, 36, 31, 0.55);
-            backdrop-filter: blur(4px);
-        }
-        @keyframes fadeInScale {
-            from { opacity: 0; transform: scale(0.96) translateY(8px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        .animate-modal {
-            animation: fadeInScale 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        /* Rejtett görgetősáv szűrőkhöz mobilon */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body class="antialiased selection:bg-terracotta-100 selection:text-terracotta-600">
 
-    <!-- 1. FELSŐ NAVIGÁCIÓS SÁV -->
     <header class="sticky top-0 z-40 bg-cream-50/90 backdrop-blur-md border-b border-cream-200/80">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <!-- Logó -->
                 <a href="#" class="flex items-center gap-3 group">
                     <div class="w-11 h-11 rounded-2xl bg-sage-500 text-white flex items-center justify-center shadow-sm group-hover:bg-sage-600 transition-colors">
                         <i class="fa-solid fa-paw text-xl"></i>
                     </div>
                     <div>
-                        <span class="font-heading font-extrabold text-xl tracking-tight text-bark-900 block leading-none">Tappancs</span>
-                        <span class="text-xs font-bold uppercase tracking-widest text-sage-600">Menedék</span>
+                        <span class="font-heading font-extrabold text-xl tracking-tight text-bark-900 block leading-none">Pet</span>
+                        <span class="text-xs font-bold uppercase tracking-widest text-sage-600">Heaven</span>
                     </div>
                 </a>
 
-                <!-- Asztali menü -->
                 <nav class="hidden md:flex items-center gap-8">
                     <a href="#allataink" class="font-semibold text-bark-800 hover:text-terracotta-500 transition-colors">Állataink</a>
-                    <a href="#hogyan-segithetsz" class="font-semibold text-bark-800 hover:text-terracotta-500 transition-colors">Hogyan segíthetsz?</a>
-                    <a href="#tamogatoi-fal" class="font-semibold text-bark-800 hover:text-terracotta-500 transition-colors">Támogatói fal</a>
                     <a href="#kapcsolat" class="font-semibold text-bark-800 hover:text-terracotta-500 transition-colors">Kapcsolat</a>
                 </nav>
 
-                <!-- CTA és Mobil menü gomb -->
                 <div class="flex items-center gap-3">
-                    <a href="#allataink" class="hidden sm:inline-flex items-center gap-2 bg-terracotta-500 hover:bg-terracotta-600 text-white font-bold px-5 py-2.5 rounded-2xl shadow-sm hover:shadow transition-all text-sm">
-                        <i class="fa-solid fa-heart"></i>
-                        <span>Fogadj örökbe!</span>
-                    </a>
-                    <button id="mobileMenuBtn" class="md:hidden p-2.5 rounded-xl bg-cream-100 text-bark-800 hover:bg-cream-200 transition-colors" aria-label="Menü megnyitása">
+                    <button id="mobileMenuBtn" type="button" class="md:hidden p-2.5 rounded-xl bg-cream-100 text-bark-800 hover:bg-cream-200 transition-colors" aria-label="Menü megnyitása">
                         <i class="fa-solid fa-bars text-lg"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Mobil lenyíló menü -->
         <div id="mobileMenu" class="hidden md:hidden bg-cream-50 border-b border-cream-200 px-4 pt-2 pb-5 space-y-2">
             <a href="#allataink" class="block px-4 py-2.5 rounded-xl font-semibold text-bark-800 hover:bg-cream-100">Állataink</a>
-            <a href="#hogyan-segithetsz" class="block px-4 py-2.5 rounded-xl font-semibold text-bark-800 hover:bg-cream-100">Hogyan segíthetsz?</a>
-            <a href="#tamogatoi-fal" class="block px-4 py-2.5 rounded-xl font-semibold text-bark-800 hover:bg-cream-100">Támogatói fal</a>
             <a href="#kapcsolat" class="block px-4 py-2.5 rounded-xl font-semibold text-bark-800 hover:bg-cream-100">Kapcsolat</a>
         </div>
     </header>
 
-    <!-- HERO SZEKCIÓ STATISZTIKÁKKAL -->
     <section class="relative overflow-hidden pt-10 pb-16 lg:pt-16 lg:pb-24 bg-gradient-to-b from-cream-100/70 to-cream-50">
-        <!-- Dekoratív háttérelemek -->
         <div class="absolute top-12 left-10 w-64 h-64 bg-sage-100/60 rounded-full blur-3xl -z-10"></div>
         <div class="absolute bottom-10 right-10 w-72 h-72 bg-terracotta-100/60 rounded-full blur-3xl -z-10"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-                <!-- Bal oldali szöveg -->
                 <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
                     <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sage-100 text-sage-700 font-bold text-sm">
                         <i class="fa-solid fa-seedling"></i>
-                        <span>Helyi Állatvédő és Örökbefogadó Központ</span>
+                        <span>Helyi Állatvédő Központ</span>
                     </div>
                     <h1 class="font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl text-bark-900 leading-[1.15]">
                         Minden tappancs megérdemel egy <span class="text-terracotta-500">szerető otthont.</span>
                     </h1>
                     <p class="text-lg sm:text-xl text-bark-800/80 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                        Ismerd meg menhelyünk védenceit! Legyen szó örökbefogadásról vagy virtuális örökbefogadásról, nálunk közvetlenül segíthetsz a gazdira váró kutyusoknak és cicáknak.
+                        Ismerd meg menhelyünk védenceit! Nézd meg kutyusaink és cicáink adatlapját és történetét.
                     </p>
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
                         <a href="#allataink" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-sage-500 hover:bg-sage-600 text-white font-bold text-base shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2.5">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                            <span>Védenceink böngészése</span>
-                        </a>
-                        <a href="#hogyan-segithetsz" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white hover:bg-cream-100 text-bark-900 font-bold text-base border border-cream-200 shadow-sm transition-all flex items-center justify-center gap-2.5">
-                            <i class="fa-solid fa-hand-holding-heart text-terracotta-500"></i>
-                            <span>Virtuális támogatás</span>
+                            <i class="fa-solid fa-paw"></i>
+                            <span>Védenceink megtekintése</span>
                         </a>
                     </div>
 
-                    <!-- Statisztikák -->
-                    <div class="grid grid-cols-3 gap-4 pt-6 border-t border-cream-200/80 max-w-xl mx-auto lg:mx-0">
+                    <div class="grid grid-cols-2 gap-4 pt-6 border-t border-cream-200/80 max-w-md mx-auto lg:mx-0">
                         <div>
                             <div class="font-heading font-extrabold text-2xl sm:text-3xl text-sage-600">428+</div>
                             <div class="text-xs sm:text-sm font-semibold text-bark-800/70">Gazdira talált állat</div>
                         </div>
                         <div>
                             <div class="font-heading font-extrabold text-2xl sm:text-3xl text-terracotta-500" id="heroActiveAnimals">8</div>
-                            <div class="text-xs sm:text-sm font-semibold text-bark-800/70">Jelenleg gazdit keres</div>
-                        </div>
-                        <div>
-                            <div class="font-heading font-extrabold text-2xl sm:text-3xl text-bark-900" id="heroSupportersCount">156</div>
-                            <div class="text-xs sm:text-sm font-semibold text-bark-800/70">Virtuális támogató</div>
+                            <div class="text-xs sm:text-sm font-semibold text-bark-800/70">Jelenleg a menhelyen</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Jobb oldali képkollázs -->
                 <div class="lg:col-span-5 relative">
                     <div class="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white aspect-[4/3] sm:aspect-[16/11] lg:aspect-[4/4]">
-                        <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=80" 
-                             alt="Boldog kutyák a menhelyen" 
+                        <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=80"
+                             alt="Boldog kutyák a menhelyen"
                              onerror="this.src='https://placehold.co/800x800/E1EBE4/395443?text=Tappancs+Menedek'"
                              class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-bark-900/40 via-transparent to-transparent"></div>
@@ -187,7 +97,7 @@
                             </div>
                             <div>
                                 <p class="font-bold text-bark-900 text-sm">Minden védencünk oltva és chipezve</p>
-                                <p class="text-xs text-bark-800/70">Teljes körű állatorvosi ellátással adjuk őket örökbe.</p>
+                                <p class="text-xs text-bark-800/70">Teljes körű állatorvosi ellátással gondozzuk őket.</p>
                             </div>
                         </div>
                     </div>
@@ -196,163 +106,23 @@
         </div>
     </section>
 
-    <!-- 2. INTERAKTÍV SZŰRŐPANEL ÉS KERESŐ + 3. ÁLLATKATALÓGUS -->
-    <section id="allataink" class="py-14 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="allataink" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
             <div>
-                <span class="text-terracotta-500 font-bold text-sm uppercase tracking-wider">Gazdira váró védenceink</span>
-                <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-bark-900 mt-1">Találd meg új legjobb barátodat</h2>
+                <span class="text-sage-600 font-bold text-sm uppercase tracking-wider">Védenceink</span>
+                <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-bark-900 mt-1">Állataink</h2>
             </div>
-            <p class="text-bark-800/75 font-medium">
-                Jelenleg <span id="resultCount" class="font-extrabold text-sage-600">8</span> védenc felel meg a szűrésnek
+            <p class="text-sm font-semibold text-bark-800/70">
+                Összesen: <span id="resultCount" class="font-extrabold text-bark-900">8</span> állat
             </p>
         </div>
 
-        <!-- Szűrőpanel -->
-        <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-cream-200 mb-10">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 items-end">
-                
-                <!-- Név / fajta kereső -->
-                <div class="lg:col-span-4">
-                    <label for="searchInput" class="block text-xs font-bold uppercase tracking-wider text-bark-800/70 mb-2">Keresés név vagy fajta alapján</label>
-                    <div class="relative">
-                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-bark-800/40"></i>
-                        <input type="text" id="searchInput" placeholder="Pl. Bodri, Cirmi, vizsla..." 
-                               class="w-full pl-11 pr-4 py-3 rounded-2xl bg-cream-50 border border-cream-200 focus:border-sage-500 focus:ring-2 focus:ring-sage-500/20 outline-none text-bark-900 font-medium transition-all">
-                    </div>
-                </div>
-
-                <!-- Faj választó (Gombok) -->
-                <div class="lg:col-span-3">
-                    <span class="block text-xs font-bold uppercase tracking-wider text-bark-800/70 mb-2">Faj</span>
-                    <div class="grid grid-cols-3 gap-1.5 bg-cream-100 p-1.5 rounded-2xl" id="speciesFilterGroup">
-                        <button type="button" data-species="all" class="species-btn active py-2 px-3 rounded-xl text-sm font-bold transition-all bg-sage-500 text-white shadow-sm">
-                            Összes
-                        </button>
-                        <button type="button" data-species="Kutya" class="species-btn py-2 px-3 rounded-xl text-sm font-bold transition-all text-bark-800 hover:bg-white/60">
-                            <i class="fa-solid fa-dog mr-1"></i>Kutya
-                        </button>
-                        <button type="button" data-species="Macska" class="species-btn py-2 px-3 rounded-xl text-sm font-bold transition-all text-bark-800 hover:bg-white/60">
-                            <i class="fa-solid fa-cat mr-1"></i>Macska
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Korcsoport -->
-                <div class="lg:col-span-2">
-                    <label for="ageFilter" class="block text-xs font-bold uppercase tracking-wider text-bark-800/70 mb-2">Korcsoport</label>
-                    <select id="ageFilter" class="w-full px-4 py-3 rounded-2xl bg-cream-50 border border-cream-200 focus:border-sage-500 focus:ring-2 focus:ring-sage-500/20 outline-none text-bark-900 font-semibold cursor-pointer">
-                        <option value="all">Minden kor</option>
-                        <option value="Kölyök">Kölyök (0–1 év)</option>
-                        <option value="Felnőtt">Felnőtt (1–7 év)</option>
-                        <option value="Idős">Idős (7+ év)</option>
-                    </select>
-                </div>
-
-                <!-- Méret -->
-                <div class="lg:col-span-2">
-                    <label for="sizeFilter" class="block text-xs font-bold uppercase tracking-wider text-bark-800/70 mb-2">Méret</label>
-                    <select id="sizeFilter" class="w-full px-4 py-3 rounded-2xl bg-cream-50 border border-cream-200 focus:border-sage-500 focus:ring-2 focus:ring-sage-500/20 outline-none text-bark-900 font-semibold cursor-pointer">
-                        <option value="all">Minden méret</option>
-                        <option value="Kicsi">Kicsi</option>
-                        <option value="Közepes">Közepes</option>
-                        <option value="Nagy">Nagy</option>
-                    </select>
-                </div>
-
-                <!-- Szűrők törlése -->
-                <div class="lg:col-span-1 flex justify-end">
-                    <button type="button" id="resetFiltersBtn" title="Szűrők alaphelyzetbe állítása"
-                            class="w-full lg:w-auto px-4 py-3 rounded-2xl bg-cream-100 hover:bg-terracotta-100 text-bark-800 hover:text-terracotta-600 font-bold text-sm transition-colors flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-rotate-left"></i>
-                        <span class="lg:hidden">Alaphelyzet</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Állat kártyák rácsa -->
-        <div id="animalsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7">
-            <!-- Dinamikusan generált kártyák helye -->
-        </div>
-
-        <!-- Üres találati állapot -->
-        <div id="emptyState" class="hidden text-center py-16 bg-white rounded-3xl border border-cream-200 px-4">
-            <div class="w-16 h-16 rounded-full bg-cream-100 text-bark-800/50 flex items-center justify-center mx-auto mb-4 text-2xl">
-                <i class="fa-solid fa-paw"></i>
-            </div>
-            <h3 class="font-heading font-bold text-xl text-bark-900">Nincs a szűrésnek megfelelő védencünk</h3>
-            <p class="text-bark-800/70 mt-1 max-w-md mx-auto">Próbáld meg módosítani a keresési feltételeket, vagy állítsd alaphelyzetbe a szűrőket!</p>
-            <button type="button" onclick="resetAllFilters()" class="mt-5 px-6 py-2.5 rounded-2xl bg-sage-500 hover:bg-sage-600 text-white font-bold text-sm transition-colors">
-                Összes állat mutatása
-            </button>
-        </div>
+        <div id="animalsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7"></div>
     </section>
 
-    <!-- HOGYAN SEGÍTHETSZ? & ÉLŐ TÁMOGATÓI FAL -->
-    <section id="hogyan-segithetsz" class="py-16 bg-cream-100/70 border-y border-cream-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-12">
-                <span class="text-sage-600 font-bold text-sm uppercase tracking-wider">Közösségi összefogás</span>
-                <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-bark-900 mt-1">Hogyan segíthetsz a menhelynek?</h2>
-                <p class="text-bark-800/75 mt-3">Nem tudsz most örökbe fogadni? Többféleképpen is szebbé teheted védenceink mindennapjait.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
-                <div class="bg-white p-7 rounded-3xl border border-cream-200 shadow-sm">
-                    <div class="w-12 h-12 rounded-2xl bg-terracotta-100 text-terracotta-600 flex items-center justify-center text-xl mb-5">
-                        <i class="fa-solid fa-heart-circle-plus"></i>
-                    </div>
-                    <h3 class="font-heading font-bold text-xl text-bark-900 mb-2">1. Örökbefogadás</h3>
-                    <p class="text-bark-800/75 text-sm leading-relaxed">Válassz egy szimpatikus kutyust vagy cicát, töltsd ki a szándéknyilatkozatot, és látogass el hozzánk ismerkedni!</p>
-                </div>
-
-                <div class="bg-white p-7 rounded-3xl border border-cream-200 shadow-sm">
-                    <div class="w-12 h-12 rounded-2xl bg-sage-100 text-sage-600 flex items-center justify-center text-xl mb-5">
-                        <i class="fa-solid fa-bowl-food"></i>
-                    </div>
-                    <h3 class="font-heading font-bold text-xl text-bark-900 mb-2">2. Virtuális támogatás</h3>
-                    <p class="text-bark-800/75 text-sm leading-relaxed">Válassz ki egy konkrét állatot, és támogasd havi tápját, jutalomfalatját vagy orvosi ellátását akár egy kávé árával.</p>
-                </div>
-
-                <div class="bg-white p-7 rounded-3xl border border-cream-200 shadow-sm">
-                    <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-5">
-                        <i class="fa-solid fa-person-walking-with-cane"></i>
-                    </div>
-                    <h3 class="font-heading font-bold text-xl text-bark-900 mb-2">3. Önkéntes sétáltatás</h3>
-                    <p class="text-bark-800/75 text-sm leading-relaxed">Hétvégente várjuk a lelkes sétáltatókat és cicás simogatókat, hogy védenceink sok szeretetet kapjanak.</p>
-                </div>
-            </div>
-
-            <!-- Élő Támogatói Fal -->
-            <div id="tamogatoi-fal" class="bg-white rounded-3xl p-6 sm:p-8 border border-cream-200 shadow-sm">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-cream-100">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-terracotta-500 text-white flex items-center justify-center">
-                            <i class="fa-solid fa-award"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-heading font-bold text-xl text-bark-900">Legutóbbi Virtuális Támogatóink</h3>
-                            <p class="text-xs text-bark-800/65">Köszönjük minden jószívű támogatónknak a segítséget!</p>
-                        </div>
-                    </div>
-                    <div class="bg-sage-50 px-4 py-2 rounded-2xl border border-sage-100">
-                        <span class="text-xs font-bold text-sage-700 uppercase">Összegyűlt virtuális támogatás: </span>
-                        <span id="totalDonationsDisplay" class="font-heading font-extrabold text-sage-700 text-base">42 000 Ft</span>
-                    </div>
-                </div>
-
-                <div id="supportersWallList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <!-- Dinamikusan frissülő támogatók -->
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- LÁBLÉC / KAPCSOLAT -->
     <footer id="kapcsolat" class="bg-bark-900 text-cream-100 pt-14 pb-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-white/10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 pb-10 border-b border-white/10">
                 <div>
                     <div class="flex items-center gap-3 mb-4">
                         <div class="w-10 h-10 rounded-xl bg-sage-500 text-white flex items-center justify-center">
@@ -374,34 +144,20 @@
                         <li class="flex items-center gap-2.5"><i class="fa-solid fa-clock text-terracotta-400"></i> Látogatás: K–V 10:00 – 16:00</li>
                     </ul>
                 </div>
-
-                <div>
-                    <h4 class="font-heading font-bold text-white mb-4">Adó 1% felajánlás</h4>
-                    <p class="text-sm text-cream-200/80 mb-3">Támogasd védenceinket adód 1%-ával is:</p>
-                    <div class="bg-white/5 border border-white/10 rounded-2xl p-3.5 text-sm">
-                        <p class="font-bold text-white">Tappancs Menedék Alapítvány</p>
-                        <p class="text-terracotta-400 font-mono font-bold mt-1">Adószám: 18945210-1-09</p>
-                    </div>
-                </div>
             </div>
             <div class="pt-6 text-center text-xs text-cream-200/50">
-                &copy; 2026 Tappancs Menedék Állatvédő Egyesület. Minden jog fenntartva.
+                &copy; 2026 PetHeaven Állatvédő Egyesület. Minden jog fenntartva.
             </div>
         </div>
     </footer>
 
-    <!-- ===================================================================== -->
-    <!-- 4. RÉSZLETES ADATLAP ÉS ÖRÖKBEFOGADÁSI MODÁLIS ABLAK                   -->
-    <!-- ===================================================================== -->
     <div id="detailModal" class="fixed inset-0 z-50 hidden modal-backdrop overflow-y-auto p-4 sm:p-6 flex items-center justify-center">
         <div class="bg-cream-50 rounded-3xl max-w-4xl w-full shadow-2xl border border-cream-200 overflow-hidden animate-modal my-auto relative">
-            <!-- Bezárás gomb -->
             <button type="button" onclick="closeModal('detailModal')" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-bark-900 shadow-md flex items-center justify-center transition-transform hover:scale-105" aria-label="Bezárás">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 max-h-[90vh] overflow-y-auto">
-                <!-- Bal oldal: Fotó és Egészségügyi infók -->
                 <div class="lg:col-span-5 bg-cream-100/80 p-5 sm:p-6 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-cream-200">
                     <div>
                         <div class="rounded-2xl overflow-hidden aspect-[4/3] shadow-sm mb-5 bg-cream-200">
@@ -415,7 +171,6 @@
                         <h3 id="modalPetName" class="font-heading font-extrabold text-3xl text-bark-900"></h3>
                         <p id="modalPetBreed" class="text-sm font-semibold text-bark-800/75 mb-4"></p>
 
-                        <!-- Egészségügyi státusz -->
                         <div class="bg-white rounded-2xl p-4 border border-cream-200 space-y-2.5 text-sm">
                             <div class="flex items-center justify-between">
                                 <span class="text-bark-800/70 font-medium">Kor / Méret:</span>
@@ -435,92 +190,24 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Gyors átváltás virtuális támogatásra -->
-                    <div class="mt-5 pt-4 border-t border-cream-200">
-                        <button type="button" id="switchToSupportBtn" class="w-full py-3 px-4 rounded-2xl bg-terracotta-100 hover:bg-terracotta-200 text-terracotta-600 font-bold text-sm transition-colors flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-hand-holding-heart"></i>
-                            <span>Inkább virtuálisan támogatom</span>
-                        </button>
-                    </div>
                 </div>
 
-                <!-- Jobb oldal: Történet, személyiségjegyek és Örökbefogadási űrlap -->
-                <div class="lg:col-span-7 p-5 sm:p-7 space-y-6">
-                    <div>
-                        <h4 class="font-heading font-bold text-base text-bark-900 uppercase tracking-wider text-xs mb-2">Személyiségjegyek</h4>
-                        <div id="modalPetTraits" class="flex flex-wrap gap-2"></div>
-                    </div>
-
-                    <div>
-                        <h4 class="font-heading font-bold text-xs text-bark-900 uppercase tracking-wider mb-1.5">Története</h4>
-                        <p id="modalPetStory" class="text-sm text-bark-800/85 leading-relaxed bg-white p-4 rounded-2xl border border-cream-200"></p>
-                    </div>
-
-                    <!-- Örökbefogadási szándéknyilatkozat űrlap -->
-                    <div id="adoptionFormContainer" class="bg-white p-5 rounded-2xl border border-sage-200 shadow-sm">
-                        <div class="flex items-center gap-2.5 mb-4">
-                            <div class="w-8 h-8 rounded-lg bg-sage-500 text-white flex items-center justify-center text-sm">
-                                <i class="fa-solid fa-file-signature"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-heading font-bold text-lg text-bark-900 leading-tight">Örökbefogadási szándéknyilatkozat</h4>
-                                <p class="text-xs text-bark-800/65">Töltsd ki az alábbi adatokat, és kollégánk 24 órán belül keresni fog!</p>
-                            </div>
+                <div class="lg:col-span-7 p-6 sm:p-7 space-y-6 flex flex-col justify-between">
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-heading font-bold text-lg text-bark-900 mb-2">Története</h4>
+                            <p id="modalPetStory" class="text-sm text-bark-800/80 leading-relaxed"></p>
                         </div>
 
-                        <form id="adoptionForm" class="space-y-3.5">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                                <div>
-                                    <label class="block text-xs font-bold text-bark-800 mb-1">Teljes neved *</label>
-                                    <input type="text" id="adoptName" required placeholder="Kovács Anna"
-                                           class="w-full px-3.5 py-2.5 rounded-xl bg-cream-50 border border-cream-200 focus:border-sage-500 outline-none text-sm">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold text-bark-800 mb-1">Telefonszám *</label>
-                                    <input type="tel" id="adoptPhone" required placeholder="+36 30 123 4567"
-                                           class="w-full px-3.5 py-2.5 rounded-xl bg-cream-50 border border-cream-200 focus:border-sage-500 outline-none text-sm">
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                                <div>
-                                    <label class="block text-xs font-bold text-bark-800 mb-1">E-mail cím *</label>
-                                    <input type="email" id="adoptEmail" required placeholder="anna@pelda.hu"
-                                           class="w-full px-3.5 py-2.5 rounded-xl bg-cream-50 border border-cream-200 focus:border-sage-500 outline-none text-sm">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold text-bark-800 mb-1">Lakhatási körülmények *</label>
-                                    <select id="adoptHousing" required class="w-full px-3.5 py-2.5 rounded-xl bg-cream-50 border border-cream-200 focus:border-sage-500 outline-none text-sm font-medium">
-                                        <option value="Kertes ház (kerített)">Kertes ház (biztonságos kerítéssel)</option>
-                                        <option value="Lakás / Társasház">Lakás / Társasház</option>
-                                        <option value="Tanya / Nagy birtok">Tanya / Nagy birtok</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label class="block text-xs font-bold text-bark-800 mb-1">Rövid üzenet / tapasztalat állattartással</label>
-                                <textarea id="adoptMessage" rows="2" placeholder="Mesélj magadról vagy a családodról pár mondatban..."
-                                          class="w-full px-3.5 py-2 rounded-xl bg-cream-50 border border-cream-200 focus:border-sage-500 outline-none text-sm"></textarea>
-                            </div>
-
-                            <button type="submit" class="w-full py-3.5 px-6 rounded-2xl bg-sage-500 hover:bg-sage-600 text-white font-bold text-sm shadow-sm hover:shadow transition-all flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-paper-plane"></i>
-                                <span>Örökbefogadási kérelem elküldése</span>
-                            </button>
-                        </form>
+                        <div>
+                            <h4 class="font-heading font-bold text-sm uppercase tracking-wider text-bark-800/70 mb-2.5">Tulajdonságai</h4>
+                            <div id="modalPetTraits" class="flex flex-wrap gap-2"></div>
+                        </div>
                     </div>
 
-                    <!-- Sikeres beküldés visszajelzés -->
-                    <div id="adoptionSuccessBox" class="hidden bg-sage-50 border border-sage-200 rounded-2xl p-6 text-center space-y-3">
-                        <div class="w-12 h-12 rounded-full bg-sage-500 text-white flex items-center justify-center mx-auto text-xl">
-                            <i class="fa-solid fa-check"></i>
-                        </div>
-                        <h4 class="font-heading font-bold text-xl text-bark-900">Köszönjük a jelentkezésedet!</h4>
-                        <p id="adoptionSuccessText" class="text-sm text-bark-800/80"></p>
-                        <button type="button" onclick="closeModal('detailModal')" class="mt-2 px-5 py-2 rounded-xl bg-sage-600 text-white font-bold text-xs">
-                            Vissza a katalógushoz
+                    <div class="pt-4 border-t border-cream-200">
+                        <button type="button" onclick="closeModal('detailModal')" class="w-full py-3 px-5 rounded-2xl bg-sage-500 hover:bg-sage-600 text-white font-bold text-sm transition-colors">
+                            Bezárás
                         </button>
                     </div>
                 </div>
@@ -528,629 +215,5 @@
         </div>
     </div>
 
-    <!-- ===================================================================== -->
-    <!-- 5. VIRTUÁLIS TÁMOGATÁS MODÁLIS ABLAK                                  -->
-    <!-- ===================================================================== -->
-    <div id="supportModal" class="fixed inset-0 z-50 hidden modal-backdrop overflow-y-auto p-4 flex items-center justify-center">
-        <div class="bg-cream-50 rounded-3xl max-w-lg w-full shadow-2xl border border-cream-200 overflow-hidden animate-modal relative">
-            <button type="button" onclick="closeModal('supportModal')" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-white hover:bg-cream-100 text-bark-900 shadow flex items-center justify-center" aria-label="Bezárás">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <!-- Fejléc az állat fotójával -->
-            <div class="bg-gradient-to-r from-terracotta-100/80 to-cream-100 p-6 flex items-center gap-4 border-b border-cream-200">
-                <img id="supportPetImage" src="" alt="" class="w-16 h-16 rounded-2xl object-cover border-2 border-white shadow-sm shrink-0">
-                <div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600">Virtuális örökbefogadás</span>
-                    <h3 class="font-heading font-extrabold text-2xl text-bark-900">Támogasd <span id="supportPetName"></span>-t!</h3>
-                    <p class="text-xs text-bark-800/75">Jelenlegi támogatói: <span id="supportPetCount" class="font-bold text-bark-900"></span> fő</p>
-                </div>
-            </div>
-
-            <!-- Támogatási űrlap -->
-            <div id="supportFormContainer" class="p-6 space-y-5">
-                <form id="supportForm" class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-bark-800/70 mb-2.5">Válassz támogatási csomagot</label>
-                        <div class="grid grid-cols-1 gap-2.5" id="donationPackages">
-                            <button type="button" data-amount="2000" data-label="Jutalomfalat csomag" class="package-btn text-left p-3.5 rounded-2xl border-2 border-cream-200 bg-white hover:border-terracotta-400 transition-all flex items-center justify-between">
-                                <div class="flex items-center gap-3">
-                                    <span class="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center"><i class="fa-solid fa-bone"></i></span>
-                                    <div>
-                                        <p class="font-bold text-bark-900 text-sm">Jutalomfalat és játék csomag</p>
-                                        <p class="text-xs text-bark-800/65">Vidám pillanatok a mindennapokra</p>
-                                    </div>
-                                </div>
-                                <span class="font-heading font-extrabold text-terracotta-600">2 000 Ft</span>
-                            </button>
-
-                            <button type="button" data-amount="5000" data-label="Havi minőségi táp" class="package-btn active text-left p-3.5 rounded-2xl border-2 border-terracotta-500 bg-terracotta-50/50 transition-all flex items-center justify-between">
-                                <div class="flex items-center gap-3">
-                                    <span class="w-9 h-9 rounded-xl bg-sage-100 text-sage-700 flex items-center justify-center"><i class="fa-solid fa-bowl-rice"></i></span>
-                                    <div>
-                                        <p class="font-bold text-bark-900 text-sm">Havi minőségi táp hozzájárulás</p>
-                                        <p class="text-xs text-bark-800/65">Tápláló eledelek egész hónapban</p>
-                                    </div>
-                                </div>
-                                <span class="font-heading font-extrabold text-terracotta-600">5 000 Ft</span>
-                            </button>
-
-                            <button type="button" data-amount="10000" data-label="Orvosi és vitamin csomag" class="package-btn text-left p-3.5 rounded-2xl border-2 border-cream-200 bg-white hover:border-terracotta-400 transition-all flex items-center justify-between">
-                                <div class="flex items-center gap-3">
-                                    <span class="w-9 h-9 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center"><i class="fa-solid fa-kit-medical"></i></span>
-                                    <div>
-                                        <p class="font-bold text-bark-900 text-sm">Orvosi ellátás és vitaminok</p>
-                                        <p class="text-xs text-bark-800/65">Oltások és szűrővizsgálatok támogatása</p>
-                                    </div>
-                                </div>
-                                <span class="font-heading font-extrabold text-terracotta-600">10 000 Ft</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Egyedi összeg -->
-                    <div>
-                        <label for="customAmountInput" class="block text-xs font-bold text-bark-800 mb-1">Vagy adj meg egyedi összeget (Ft)</label>
-                        <input type="number" id="customAmountInput" min="500" step="500" placeholder="Pl. 3500"
-                               class="w-full px-4 py-2.5 rounded-xl bg-white border border-cream-200 focus:border-terracotta-500 outline-none text-sm font-bold">
-                    </div>
-
-                    <!-- Támogató neve a falhoz -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                            <label for="supporterNameInput" class="block text-xs font-bold text-bark-800 mb-1">Neved a támogatói falra *</label>
-                            <input type="text" id="supporterNameInput" required placeholder="Pl. Nagy Eszter"
-                                   class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-200 focus:border-terracotta-500 outline-none text-sm">
-                        </div>
-                        <div>
-                            <label for="supporterNoteInput" class="block text-xs font-bold text-bark-800 mb-1">Üzenet az állatnak (opcionális)</label>
-                            <input type="text" id="supporterNoteInput" maxlength="50" placeholder="Sok puszi, jó étvágyat!"
-                                   class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-200 focus:border-terracotta-500 outline-none text-sm">
-                        </div>
-                    </div>
-
-                    <button type="submit" class="w-full py-3.5 px-6 rounded-2xl bg-terracotta-500 hover:bg-terracotta-600 text-white font-bold text-sm shadow-md hover:shadow transition-all flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-heart"></i>
-                        <span id="submitSupportBtnText">Támogatás küldése (5 000 Ft)</span>
-                    </button>
-                </form>
-            </div>
-
-            <!-- Sikeres támogatás visszajelzés -->
-            <div id="supportSuccessBox" class="hidden p-7 text-center space-y-3">
-                <div class="w-14 h-14 rounded-full bg-terracotta-100 text-terracotta-600 flex items-center justify-center mx-auto text-2xl">
-                    <i class="fa-solid fa-heart"></i>
-                </div>
-                <h4 class="font-heading font-extrabold text-2xl text-bark-900">Hálásan köszönjük!</h4>
-                <p id="supportSuccessMessage" class="text-sm text-bark-800/80"></p>
-                <div class="pt-2">
-                    <button type="button" onclick="closeModal('supportModal')" class="px-6 py-2.5 rounded-2xl bg-terracotta-500 text-white font-bold text-sm">
-                        Szuper, megnézem a falon!
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===================================================================== -->
-    <!-- JAVASCRIPT LOGIKA                                                     -->
-    <!-- ===================================================================== -->
-    <script>
-        // 1. ÁLLATOK ADATBÁZISA (8 valósághű magyar menhelyi állat)
-        const animalsData = [
-            {
-                id: 1,
-                name: "Bodri",
-                species: "Kutya",
-                breed: "Puli keverék",
-                ageGroup: "Felnőtt",
-                ageText: "3 éves",
-                size: "Közepes",
-                gender: "Hím",
-                vaccinated: true,
-                neutered: "Igen",
-                supportersCount: 14,
-                image: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=800&q=80",
-                shortDesc: "Vidám, energikus, labdabolond kutyus, aki imádja a nagy sétákat és a gyerekeket.",
-                traits: ["Barátságos", "Játékos", "Gyerekbarát", "Okos"],
-                story: "Bodrit egy helyi park szélén találták tavaly ősszel. Gyorsan kiderült, hogy végtelenül hálás és ragaszkodó természet. Kiváló társ aktív családok mellé, akik szívesen kirándulnak vele."
-            },
-            {
-                id: 2,
-                name: "Cirmi",
-                species: "Macska",
-                breed: "Európai rövidszőrű (cirmos)",
-                ageGroup: "Kölyök",
-                ageText: "6 hónapos",
-                size: "Kicsi",
-                gender: "Nőstény",
-                vaccinated: true,
-                neutered: "Még nem (korából adódóan)",
-                supportersCount: 22,
-                image: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=800&q=80",
-                shortDesc: "Bújós, doromboló kiscica, aki minden tollas pálcát levadászik, majd az öledben alszik el.",
-                traits: ["Dorombolós", "Szobatiszta", "Kíváncsi", "Bújós"],
-                story: "Cirmi testvéreivel együtt került a menhelyre. Már az első naptól kezdve keresi az ember közelségét. Szobacicának ajánljuk, ahol biztonságban fedezheti fel a világot."
-            },
-            {
-                id: 3,
-                name: "Morzsi",
-                species: "Kutya",
-                breed: "Tacskó keverék",
-                ageGroup: "Idős",
-                ageText: "9 éves",
-                size: "Kicsi",
-                gender: "Hím",
-                vaccinated: true,
-                neutered: "Igen",
-                supportersCount: 31,
-                image: "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=800&q=80",
-                shortDesc: "Nyugodt, méltóságteljes idős úr, aki egy puha fekhelyre és rövid, kellemes sétákra vágyik.",
-                traits: ["Nyugodt", "Ragaszkodó", "Lakásba is ideális", "Csendes"],
-                story: "Morzsi idős gazdája kórházba kerülése után jutott gondozásunkba. Nagyon jól nevelt, pórázon szépen sétál, és semmi másra nem vágyik, csak egy békés nyugdíjas otthonra."
-            },
-            {
-                id: 4,
-                name: "Luna",
-                species: "Macska",
-                breed: "Fekete házimacska",
-                ageGroup: "Felnőtt",
-                ageText: "2 éves",
-                size: "Közepes",
-                gender: "Nőstény",
-                vaccinated: true,
-                neutered: "Igen",
-                supportersCount: 19,
-                image: "https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?auto=format&fit=crop&w=800&q=80",
-                shortDesc: "Elegáns, smaragdzöld szemű szépség, aki kezdetben félénk, de hamar megnyílik.",
-                traits: ["Elegáns", "Szobatiszta", "Nyugodt", "Más cicákkal kijön"],
-                story: "Luna egy elhagyatott tanyáról érkezett. Kicsit félénk az idegenekkel, de ha türelmes vagy vele, a világ legkedvesebb és leghűségesebb cicája válik belőle."
-            },
-            {
-                id: 5,
-                name: "Rex",
-                species: "Kutya",
-                breed: "Német juhász keverék",
-                ageGroup: "Felnőtt",
-                ageText: "4 éves",
-                size: "Nagy",
-                gender: "Hím",
-                vaccinated: true,
-                neutered: "Igen",
-                supportersCount: 27,
-                image: "https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?auto=format&fit=crop&w=800&q=80",
-                shortDesc: "Hűséges, okos és figyelmes nagytestű kutya, aki kiváló családi kedvenc és házőrző.",
-                traits: ["Hűséges", "Tanulékony", "Kiegyensúlyozott", "Kertes házba"],
-                story: "Rex kiváló idegrendszerű, nagyon intelligens kutya. Alap vezényszavakat ismeri, imádja a jutalomfalatokat és a közös feladatokat. Kertes házba ajánljuk bejárással."
-            },
-            {
-                id: 6,
-                name: "Mici",
-                species: "Macska",
-                breed: "Vörös-fehér cica",
-                ageGroup: "Idős",
-                ageText: "8 éves",
-                size: "Közepes",
-                gender: "Nőstény",
-                vaccinated: true,
-                neutered: "Igen",
-                supportersCount: 16,
-                image: "https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800&q=80",
-                shortDesc: "Napfényimádó, békés természetű cica, aki az ablakpárkányról szeretné figyelni a madarakat.",
-                traits: ["Békés", "Öleb", "Szobatiszta", "Kezdőknek is ajánlott"],
-                story: "Mici egy igazi szeretetgombóc. Nem igényli a pörgést, szívesen szundikál egész délután, este pedig halkan dorombolva kéri a simogatást."
-            },
-            {
-                id: 7,
-                name: "Bogyó",
-                species: "Kutya",
-                breed: "Magyar vizsla keverék",
-                ageGroup: "Kölyök",
-                ageText: "7 hónapos",
-                size: "Közepes",
-                gender: "Hím",
-                vaccinated: true,
-                neutered: "Még nem (korából adódóan)",
-                supportersCount: 25,
-                image: "https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?auto=format&fit=crop&w=800&q=80",
-                shortDesc: "Kíváncsi, selymes fülű kölyökkutya, aki mindenkit azonnal levesz a lábáról.",
-                traits: ["Kölyök energia", "Bújós", "Kutyabarát", "Játékos"],
-                story: "Bogyó egy igazi kis bohóc! Minden új játék érdekli, remekül kijön más kutyákkal is. Olyan gazdit keres, aki szívesen viszi majd kutyaiskolába."
-            },
-            {
-                id: 8,
-                name: "Bella",
-                species: "Kutya",
-                breed: "Golden Retriever keverék",
-                ageGroup: "Felnőtt",
-                ageText: "5 éves",
-                size: "Nagy",
-                gender: "Nőstény",
-                vaccinated: true,
-                neutered: "Igen",
-                supportersCount: 18,
-                image: "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=800&q=80",
-                shortDesc: "Végtelenül szelíd, mosolygós kutyalány, aki minden emberben a legjobb barátját látja.",
-                traits: ["Szelíd", "Családcentrikus", "Türelmes", "Vízkedvelő"],
-                story: "Bella a menhelyünk egyik legkedvesebb lakója. Türelmes, békés, és minden simogatásért végtelen hálával fizet. Családok mellé tökéletes választás."
-            }
-        ];
-
-        // 2. KEZDETI TÁMOGATÓK LISTÁJA (Támogatói falhoz)
-        let supportersWall = [
-            { supporter: "Szabó Katalin", petName: "Morzsi", amount: 10000, note: "Sok egészséget drága Morzsi!", time: "12 perce" },
-            { supporter: "Tóth Gábor", petName: "Bodri", amount: 5000, note: "Egy nagy csomag jutifalatra!", time: "1 órája" },
-            { supporter: "Kiss-Varga Család", petName: "Cirmi", amount: 5000, note: "Sok simit küldünk!", time: "3 órája" },
-            { supporter: "Molnár Dániel", petName: "Rex", amount: 10000, note: "Kitartást pajtás!", time: "Tegnap" },
-            { supporter: "Horváth Eszter", petName: "Luna", amount: 2000, note: "Gyönyörű cica vagy!", time: "Tegnap" },
-            { supporter: "Farkas Péter", petName: "Bogyó", amount: 10000, note: "Jó játékot kicsi!", time: "2 napja" }
-        ];
-
-        let totalDonations = 42000;
-
-        // Szűrési állapot
-        let currentFilters = {
-            search: "",
-            species: "all",
-            age: "all",
-            size: "all"
-        };
-
-        let activeAnimalForModal = null;
-        let selectedDonationAmount = 5000;
-
-        // 3. ÁLLATKÁRTYÁK MEGJELENÍTÉSE
-        function renderAnimals() {
-            const grid = document.getElementById("animalsGrid");
-            const emptyState = document.getElementById("emptyState");
-            const resultCount = document.getElementById("resultCount");
-
-            const filtered = animalsData.filter(pet => {
-                const matchesSearch = pet.name.toLowerCase().includes(currentFilters.search.toLowerCase()) ||
-                                      pet.breed.toLowerCase().includes(currentFilters.search.toLowerCase());
-                const matchesSpecies = currentFilters.species === "all" || pet.species === currentFilters.species;
-                const matchesAge = currentFilters.age === "all" || pet.ageGroup === currentFilters.age;
-                const matchesSize = currentFilters.size === "all" || pet.size === currentFilters.size;
-
-                return matchesSearch && matchesSpecies && matchesAge && matchesSize;
-            });
-
-            resultCount.textContent = filtered.length;
-            grid.innerHTML = "";
-
-            if (filtered.length === 0) {
-                grid.classList.add("hidden");
-                emptyState.classList.remove("hidden");
-                return;
-            }
-
-            grid.classList.remove("hidden");
-            emptyState.classList.add("hidden");
-
-            filtered.forEach(pet => {
-                const speciesIcon = pet.species === "Kutya" ? "fa-dog" : "fa-cat";
-                const card = document.createElement("article");
-                card.className = "bg-white rounded-3xl overflow-hidden border border-cream-200/90 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group";
-
-                card.innerHTML = `
-                    <div>
-                        <!-- Kép konténer -->
-                        <div class="relative aspect-[4/3] overflow-hidden bg-cream-100 cursor-pointer" onclick="openDetailModal(${pet.id})">
-                            <img src="${pet.image}" alt="${pet.name}" 
-                                 onerror="this.src='https://placehold.co/600x450/EFE7D8/3D352E?text=${encodeURIComponent(pet.name)}'"
-                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                            
-                            <!-- Faj jelvény -->
-                            <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 backdrop-blur-sm text-bark-900 text-xs font-extrabold shadow-sm flex items-center gap-1.5">
-                                <i class="fa-solid ${speciesIcon} text-sage-600"></i>
-                                ${pet.species}
-                            </span>
-
-                            <!-- Virtuális támogatók száma jelvény -->
-                            <span class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-terracotta-500/95 text-white text-xs font-bold shadow-sm flex items-center gap-1" title="Virtuális támogatók száma">
-                                <i class="fa-solid fa-heart text-[10px]"></i>
-                                <span>${pet.supportersCount}</span>
-                            </span>
-                        </div>
-
-                        <!-- Tartalom -->
-                        <div class="p-5">
-                            <div class="flex items-baseline justify-between gap-2 mb-1">
-                                <h3 class="font-heading font-extrabold text-xl text-bark-900 group-hover:text-sage-600 transition-colors cursor-pointer" onclick="openDetailModal(${pet.id})">${pet.name}</h3>
-                                <span class="text-xs font-bold text-bark-800/60">${pet.gender}</span>
-                            </div>
-                            <p class="text-xs font-semibold text-bark-800/70 mb-3">${pet.breed}</p>
-
-                            <!-- Címkék: Kor és Méret -->
-                            <div class="flex flex-wrap gap-1.5 mb-3.5">
-                                <span class="px-2.5 py-1 rounded-xl bg-sage-50 text-sage-700 text-xs font-bold border border-sage-100">
-                                    <i class="fa-regular fa-clock mr-1"></i>${pet.ageGroup} (${pet.ageText})
-                                </span>
-                                <span class="px-2.5 py-1 rounded-xl bg-cream-100 text-bark-800 text-xs font-bold">
-                                    <i class="fa-solid fa-ruler-vertical mr-1 text-bark-800/50"></i>${pet.size}
-                                </span>
-                            </div>
-
-                            <p class="text-sm text-bark-800/80 line-clamp-2 leading-relaxed">
-                                ${pet.shortDesc}
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Akciógombok -->
-                    <div class="px-5 pb-5 pt-1 space-y-2">
-                        <button type="button" onclick="openDetailModal(${pet.id})" 
-                                class="w-full py-2.5 px-4 rounded-2xl bg-sage-500 hover:bg-sage-600 text-white font-bold text-sm transition-colors flex items-center justify-center gap-2 shadow-sm">
-                            <i class="fa-solid fa-paw"></i>
-                            <span>Adatlap & Örökbefogadás</span>
-                        </button>
-                        <button type="button" onclick="openSupportModal(${pet.id})" 
-                                class="w-full py-2.5 px-4 rounded-2xl bg-terracotta-50 hover:bg-terracotta-100 text-terracotta-600 font-bold text-sm transition-colors flex items-center justify-center gap-2 border border-terracotta-100">
-                            <i class="fa-solid fa-hand-holding-heart"></i>
-                            <span>Virtuális támogatás</span>
-                        </button>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        // 4. TÁMOGATÓI FAL MEGJELENÍTÉSE
-        function renderSupportersWall() {
-            const list = document.getElementById("supportersWallList");
-            const totalDisplay = document.getElementById("totalDonationsDisplay");
-            const heroCount = document.getElementById("heroSupportersCount");
-
-            totalDisplay.textContent = totalDonations.toLocaleString("hu-HU") + " Ft";
-            
-            // Összes támogató számítása
-            const totalSupporters = animalsData.reduce((sum, pet) => sum + pet.supportersCount, 0);
-            heroCount.textContent = totalSupporters;
-
-            list.innerHTML = "";
-            supportersWall.slice(0, 6).forEach(item => {
-                const div = document.createElement("div");
-                div.className = "p-4 rounded-2xl bg-cream-50 border border-cream-200/80 flex items-start justify-between gap-3";
-                div.innerHTML = `
-                    <div class="flex items-start gap-3">
-                        <div class="w-9 h-9 rounded-full bg-sage-100 text-sage-700 font-extrabold text-sm flex items-center justify-center shrink-0 mt-0.5">
-                            ${item.supporter.charAt(0).toUpperCase()}
-                        </div>
-                        <div>
-                            <p class="font-bold text-sm text-bark-900">${item.supporter}</p>
-                            <p class="text-xs text-bark-800/70">támogatta: <span class="font-bold text-terracotta-600">${item.petName}</span></p>
-                            ${item.note ? `<p class="text-xs italic text-bark-800/65 mt-1">"${item.note}"</p>` : ""}
-                        </div>
-                    </div>
-                    <div class="text-right shrink-0">
-                        <span class="inline-block px-2.5 py-1 rounded-xl bg-white border border-cream-200 font-heading font-extrabold text-xs text-sage-700">
-                            +${item.amount.toLocaleString("hu-HU")} Ft
-                        </span>
-                        <span class="block text-[11px] text-bark-800/50 mt-1">${item.time}</span>
-                    </div>
-                `;
-                list.appendChild(div);
-            });
-        }
-
-        // 5. SZŰRŐK KEZELÉSE
-        document.getElementById("searchInput").addEventListener("input", (e) => {
-            currentFilters.search = e.target.value;
-            renderAnimals();
-        });
-
-        document.querySelectorAll(".species-btn").forEach(btn => {
-            btn.addEventListener("click", () => {
-                document.querySelectorAll(".species-btn").forEach(b => {
-                    b.classList.remove("bg-sage-500", "text-white", "shadow-sm");
-                    b.classList.add("text-bark-800", "hover:bg-white/60");
-                });
-                btn.classList.add("bg-sage-500", "text-white", "shadow-sm");
-                btn.classList.remove("text-bark-800", "hover:bg-white/60");
-
-                currentFilters.species = btn.dataset.species;
-                renderAnimals();
-            });
-        });
-
-        document.getElementById("ageFilter").addEventListener("change", (e) => {
-            currentFilters.age = e.target.value;
-            renderAnimals();
-        });
-
-        document.getElementById("sizeFilter").addEventListener("change", (e) => {
-            currentFilters.size = e.target.value;
-            renderAnimals();
-        });
-
-        function resetAllFilters() {
-            currentFilters = { search: "", species: "all", age: "all", size: "all" };
-            document.getElementById("searchInput").value = "";
-            document.getElementById("ageFilter").value = "all";
-            document.getElementById("sizeFilter").value = "all";
-
-            document.querySelectorAll(".species-btn").forEach(b => {
-                b.classList.remove("bg-sage-500", "text-white", "shadow-sm");
-                b.classList.add("text-bark-800");
-                if (b.dataset.species === "all") {
-                    b.classList.add("bg-sage-500", "text-white", "shadow-sm");
-                    b.classList.remove("text-bark-800");
-                }
-            });
-            renderAnimals();
-        }
-
-        document.getElementById("resetFiltersBtn").addEventListener("click", resetAllFilters);
-
-        // 6. RÉSZLETES ADATLAP MODÁLIS ABLAK
-        function openDetailModal(petId) {
-            const pet = animalsData.find(p => p.id === petId);
-            if (!pet) return;
-            activeAnimalForModal = pet;
-
-            document.getElementById("modalPetImage").src = pet.image;
-            document.getElementById("modalPetImage").alt = pet.name;
-            document.getElementById("modalPetSpeciesBadge").textContent = pet.species;
-            document.getElementById("modalPetGender").textContent = pet.gender;
-            document.getElementById("modalPetName").textContent = pet.name;
-            document.getElementById("modalPetBreed").textContent = pet.breed;
-            document.getElementById("modalPetAgeSize").textContent = `${pet.ageGroup} (${pet.ageText}) • ${pet.size}`;
-            document.getElementById("modalPetNeutered").textContent = pet.neutered;
-            document.getElementById("modalPetStory").textContent = pet.story;
-
-            // Személyiségjegyek
-            const traitsContainer = document.getElementById("modalPetTraits");
-            traitsContainer.innerHTML = pet.traits.map(trait => 
-                `<span class="px-3 py-1 rounded-xl bg-sage-50 text-sage-700 text-xs font-bold border border-sage-100">${trait}</span>`
-            ).join("");
-
-            // Űrlap alaphelyzetbe állítása
-            document.getElementById("adoptionForm").reset();
-            document.getElementById("adoptionFormContainer").classList.remove("hidden");
-            document.getElementById("adoptionSuccessBox").classList.add("hidden");
-
-            // Átváltás gomb beállítása
-            document.getElementById("switchToSupportBtn").onclick = () => {
-                closeModal("detailModal");
-                openSupportModal(pet.id);
-            };
-
-            document.getElementById("detailModal").classList.remove("hidden");
-            document.body.style.overflow = "hidden";
-        }
-
-        // Örökbefogadási űrlap beküldése
-        document.getElementById("adoptionForm").addEventListener("submit", (e) => {
-            e.preventDefault();
-            if (!activeAnimalForModal) return;
-
-            const applicantName = document.getElementById("adoptName").value.trim();
-            const applicantEmail = document.getElementById("adoptEmail").value.trim();
-
-            document.getElementById("adoptionFormContainer").classList.add("hidden");
-            document.getElementById("adoptionSuccessBox").classList.remove("hidden");
-            document.getElementById("adoptionSuccessText").innerHTML = 
-                `Kedves <strong>${applicantName}</strong>! Örökbefogadási szándéknyilatkozatodat <strong>${activeAnimalForModal.name}</strong> kapcsán rögzítettük. A visszaigazolást elküldtük a(z) <strong>${applicantEmail}</strong> címre.`;
-        });
-
-        // 7. VIRTUÁLIS TÁMOGATÁS MODÁLIS ABLAK
-        function openSupportModal(petId) {
-            const pet = animalsData.find(p => p.id === petId);
-            if (!pet) return;
-            activeAnimalForModal = pet;
-
-            document.getElementById("supportPetImage").src = pet.image;
-            document.getElementById("supportPetName").textContent = pet.name;
-            document.getElementById("supportPetCount").textContent = pet.supportersCount;
-
-            // Alapértelmezett 5000 Ft csomag kijelölése
-            selectPackageButton(5000);
-            document.getElementById("customAmountInput").value = "";
-            document.getElementById("supportForm").reset();
-            document.getElementById("supportFormContainer").classList.remove("hidden");
-            document.getElementById("supportSuccessBox").classList.add("hidden");
-
-            document.getElementById("supportModal").classList.remove("hidden");
-            document.body.style.overflow = "hidden";
-        }
-
-        function selectPackageButton(amount) {
-            selectedDonationAmount = amount;
-            document.querySelectorAll(".package-btn").forEach(btn => {
-                const btnAmt = parseInt(btn.dataset.amount, 10);
-                if (btnAmt === amount) {
-                    btn.classList.add("border-terracotta-500", "bg-terracotta-50/50");
-                    btn.classList.remove("border-cream-200", "bg-white");
-                } else {
-                    btn.classList.remove("border-terracotta-500", "bg-terracotta-50/50");
-                    btn.classList.add("border-cream-200", "bg-white");
-                }
-            });
-            document.getElementById("submitSupportBtnText").textContent = `Támogatás küldése (${amount.toLocaleString("hu-HU")} Ft)`;
-        }
-
-        document.querySelectorAll(".package-btn").forEach(btn => {
-            btn.addEventListener("click", () => {
-                document.getElementById("customAmountInput").value = "";
-                selectPackageButton(parseInt(btn.dataset.amount, 10));
-            });
-        });
-
-        document.getElementById("customAmountInput").addEventListener("input", (e) => {
-            const val = parseInt(e.target.value, 10);
-            if (val && val >= 500) {
-                selectedDonationAmount = val;
-                document.querySelectorAll(".package-btn").forEach(btn => {
-                    btn.classList.remove("border-terracotta-500", "bg-terracotta-50/50");
-                    btn.classList.add("border-cream-200", "bg-white");
-                });
-                document.getElementById("submitSupportBtnText").textContent = `Támogatás küldése (${val.toLocaleString("hu-HU")} Ft)`;
-            }
-        });
-
-        // Virtuális támogatás beküldése -> Azonnali frissítés!
-        document.getElementById("supportForm").addEventListener("submit", (e) => {
-            e.preventDefault();
-            if (!activeAnimalForModal) return;
-
-            const supporterName = document.getElementById("supporterNameInput").value.trim() || "Névtelen állatbarát";
-            const supporterNote = document.getElementById("supporterNoteInput").value.trim();
-
-            // 1. Növeljük az állat virtuális támogatóinak számát
-            activeAnimalForModal.supportersCount += 1;
-
-            // 2. Hozzáadjuk a támogatói falhoz és növeljük az összértéket
-            totalDonations += selectedDonationAmount;
-            supportersWall.unshift({
-                supporter: supporterName,
-                petName: activeAnimalForModal.name,
-                amount: selectedDonationAmount,
-                note: supporterNote,
-                time: "Épp most"
-            });
-
-            // 3. Újrarendereljük a kártyákat és a támogatói falat
-            renderAnimals();
-            renderSupportersWall();
-
-            // 4. Visszajelzés megjelenítése
-            document.getElementById("supportFormContainer").classList.add("hidden");
-            document.getElementById("supportSuccessBox").classList.remove("hidden");
-            document.getElementById("supportSuccessMessage").innerHTML = 
-                `Kedves <strong>${supporterName}</strong>! Sikeresen támogattad <strong>${activeAnimalForModal.name}</strong> mindennapjait <strong>${selectedDonationAmount.toLocaleString("hu-HU")} Ft</strong> összeggel. Neved már meg is jelent a támogatói falon!`;
-        });
-
-        // 8. MODÁLIS ABLAK BEZÁRÁSA & MOBIL MENÜ
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.add("hidden");
-            document.body.style.overflow = "";
-        }
-
-        // Háttérre kattintáskor bezárás
-        ["detailModal", "supportModal"].forEach(id => {
-            document.getElementById(id).addEventListener("click", (e) => {
-                if (e.target.id === id) closeModal(id);
-            });
-        });
-
-        // ESC billentyűre bezárás
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape") {
-                closeModal("detailModal");
-                closeModal("supportModal");
-            }
-        });
-
-        // Mobil menü váltó
-        document.getElementById("mobileMenuBtn").addEventListener("click", () => {
-            document.getElementById("mobileMenu").classList.toggle("hidden");
-        });
-
-        // Kezdeti betöltés
-        window.addEventListener("DOMContentLoaded", () => {
-            renderAnimals();
-            renderSupportersWall();
-        });
-    </script>
 </body>
 </html>
